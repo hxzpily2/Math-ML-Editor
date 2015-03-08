@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="300" height="150" addedEffect="{directfunction.PanelDissolve}" removedEffect="{directfunction.PanelZoom}" modalTransparency="0.6" xmlns:code="http://code.google.com/p/flexlib/">
+<code:WindowShade styleName="linkButtonWindowShade" label="Login">
+<mx:Form>
+<mx:FormItem y="20" label="User Name">
+	<mx:TextInput y="20" id="text1"/>
+</mx:FormItem>
+<mx:ControlBar height="50%" id="control" horizontalAlign="right">
+		<mx:Button label="Submit" click="call(event)"/>
+</mx:ControlBar>
+</mx:Form>
+</code:WindowShade>
+	<mx:Script>
+		<![CDATA[
+			import mx.core.Application;
+			[Bindable]
+			public var directfunction:EquationEditor=EquationEditor(Application.application);
+			public function call(event:MouseEvent):void
+			{
+				directfunction.getUser(event)	
+			}
+		]]>
+	</mx:Script>
+</mx:Panel>

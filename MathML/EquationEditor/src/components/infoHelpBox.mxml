@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" width="163" styleName="close" maxWidth="162" height="159" layout="absolute" minWidth="30" minHeight="50" showCloseButton="true" resizeEffect="Resize" close="resizeCTree(event)" title="Help Assistant">
+	
+	<mx:Style>
+		TitleWindow.close {
+			closeButtonUpSkin:Embed('icons/closeNav.png');
+			closeButtonDownSkin:Embed('icons/closeNav.png');
+			closeButtonOverSkin:Embed('icons/closeNav.png');
+			closeButtonDisabledSkin:Embed('icons/closeNav.png');
+		}
+		
+		TitleWindow.open {
+			closeButtonUpSkin:Embed('icons/openNav.png');
+			closeButtonDownSkin:Embed('icons/openNav.png');
+			closeButtonOverSkin:Embed('icons/openNav.png');
+			closeButtonDisabledSkin:Embed('icons/openNav.png');
+		}
+	</mx:Style>
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			//import components.InfoMessageService;
+			
+			import mx.controls.Text;
+			import com.messageservice.*;
+			[Embed(source="icons/ConvertibleTreeList.png")]
+            public var ctree_icon:Class;
+            
+            [Bindable]
+            [Embed(source="icons/full_list.png")]
+            public var icon1:Class;
+            [Bindable]
+            [Embed(source="icons/icon_list.png")]
+            public var icon2:Class;
+            [Bindable]
+            [Embed(source="icons/text_list.png")]
+            public var icon3:Class;
+            [Bindable]
+            [Embed(source="icons/tree.png")]
+            public var icon4:Class;
+			public var mess:XML;
+			public  function resizeCTree(event:Event):void {
+				if(this.width ==this.minWidth) {
+					this.title = "Help Assistant";
+					this.styleName = "close";
+					this.width=this.maxWidth;
+				}
+				else {
+					
+					this.styleName = "open";
+					this.width=this.minWidth;	
+					this.title = "";			
+					}
+			}
+			public function addMessage():void
+			{
+				var mess1:infoMess=new infoMess();
+				vbox.addChild(mess1);
+				mess1.iIcon.source=mess.child('icon').text().toString();
+				mess1.iMessage.text=mess.child('message').text().toString();
+				
+			}
+		]]>
+	</mx:Script>
+		<mx:XML xmlns="" id="infoMessage">
+			
+		</mx:XML>
+		<mx:VBox height="100%" width="100%" id="vbox">
+		</mx:VBox>
+	</mx:TitleWindow>
+	
+

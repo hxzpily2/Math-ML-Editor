@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Tile xmlns:mx="http://www.adobe.com/2006/mxml" width="500"  direction="horizontal" autoLayout="true" >
+	<mx:Style>
+.plaintext
+{
+fontSize: 20pt;
+fontFamily: myStixFont;
+fontWeight: normal;
+}
+.boldtext
+{
+fontSize: 20pt;
+fontFamily: myFont;
+fontWeight: normal;
+}
+</mx:Style>
+<mx:Script>
+	[Embed(source='Fonts/STIXGeneral.otf',
+fontName='myStixFont',
+mimeType='application/x-font'
+)]
+private var font1:Class;
+</mx:Script>
+
+<mx:Script>
+	<![CDATA[
+		import mx.core.Application;
+		import mx.controls.ToolTip;
+		import mx.events.ToolTipEvent;
+		import flash.events.Event;
+		import mx.controls.Button;
+		import mx.controls.Alert;
+		import mx.effects.Rotate;
+		
+		import mx.managers.ToolTipManager;
+		[Bindable]
+		public var temp:String;		
+		public var rotate:Rotate=new Rotate();		
+		public function display(event:MouseEvent):void
+		{
+			var button_Control: Button = Button ( event.currentTarget );
+			temp = button_Control.label;
+		}
+		public function capturelabel(event:MouseEvent):void
+		{
+			dispatchEvent(new EQEvent('value', this, true,false));
+		}		
+		public function showToolTip(event:ToolTipEvent):void
+		{
+			var tool:ToolTip=ToolTip(event.toolTip)
+			tool.minHeight=50
+			tool.minWidth=50
+			tool.setStyle('fontSize',60);		
+			tool.text=temp
+		}
+		
+	]]>
+</mx:Script>
+			  <mx:Repeater id="rp" startingIndex="0">
+	               	<mx:Button  id="button1" label="{String(rp.currentItem)}"  styleName="plaintext" cornerRadius="13" click="capturelabel(event)" fontFamily="myStixFont" fontSize="10"  toolTipShown="showToolTip(event)" mouseOver="display(event)"/>
+              </mx:Repeater>          	
+    
+
+
+</mx:Tile>

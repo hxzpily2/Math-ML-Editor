@@ -1,0 +1,145 @@
+Application
+{
+	paddingBottom: 2;
+	paddingLeft: 0;
+	paddingRight: 0;
+	paddingTop: 0;
+	verticalGap: 0;
+}
+Docker
+{
+	paddingLeft: 0;
+	dockingAreaStyleName: dockingArea;
+	rowStyleName: dockingRow;
+}
+
+DockableToolBar
+{
+	addedEffect: DockerFade;
+	borderStyle: outset;
+	horizontalGap: 2;
+	paddingBottom: 2;
+	paddingLeft: 0;
+	paddingRight: 8;
+	paddingTop: 0;
+	backgroundColor: #9199A4;
+}	
+
+.dockingArea
+{
+	horizontalScrollPolicy: "off";
+	verticalGap: 0;
+	borderStyle: "applicationControlBar";
+	dropShadowEnabled: true;	
+}
+
+.dockingRow
+{
+	horizontalGap: 1;
+	addedEffect: DockerFade;
+	removedEffect: DockerFade;
+}
+
+ToggleButtonBar
+{
+	removedEffect: DockerFade;
+	moveEffect: DockerMove;
+	backgroundColor: #9199A4;
+	borderAlpha: 1.0;
+	borderStyle: "default";
+	borderThickness: 0;
+	borderThicknessLeft: 0;
+	borderThicknessRight: 0;
+	borderThicknessTop: 0;
+	cornerRadius: 8;
+	dropShadowEnabled: true;
+	paddingBottom: 0;
+	paddingLeft: 0;
+	paddingRight: 0;
+	paddingTop: 0;
+	headerHeight: 20;
+}
+
+Alert{
+	 creationCompleteEffect:dockerMove;
+modalTransparencyBlur: 5;
+modalTransparency: 0.6;
+modalTransparencyColor: #DDDDDD;
+modalTransparencyDuration: 500;
+color : #0f3177;
+header-height:19;
+border-thickness: 1;
+drop-shadow-enabled: true;
+drop-shadow-color :#d1ddf7;
+background-color: #ffffff;
+corner-radius :6;
+border-style :solid;
+header-colors : #90a4d1, #5970a0;
+footer-colors : #9db6d9, #ffffff;
+border-color : #5970a0;   
+}
+
+.alertTitle{
+font-family :Times New;
+font-size :20;
+font-weight :bold;
+text-align :left;
+color :#ffffff;
+}
+
+/*HBox
+{
+borderAlpha: 1.0;
+borderStyle: "none";
+borderThickness: 0;
+borderThicknessLeft: 0;
+borderThicknessRight: 0;
+borderThicknessTop: 0;
+cornerRadius: 8;
+dropShadowEnabled: true;
+paddingBottom: 0;
+paddingLeft: 0;
+paddingRight: 0;
+paddingTop: 0;
+headerHeight: 20;
+}
+*/
+CustomPanel
+{
+borderAlpha: 0.4;
+borderThicknessLeft: 10;
+borderThicknessRight: 10;
+borderThicknessTop: 2;
+cornerRadius: 4;
+horizontalAlign: center;
+modalTransparency: 4.5;
+modalTransparencyBlur: 6;
+modalTransparencyColor: #DDDDDD;
+modalTransparencyDuration: 500;
+verticalAlign: middle;
+verticalGap: 6;
+}
+
+ .linkButtonWindowShade {
+	      	headerClass:ClassReference('mx.controls.LinkButton');
+	      	header-style-name: linkButtonStyle;
+	     
+	     	drop-shadow-enabled:true;
+	     	
+	      	corner-radius:10;
+	      	border-style:solid;
+	    	
+	    	background-color:#efefef;
+	    	background-alpha:.7;
+	    }         
+	    
+	    .linkButtonStyle {
+	    	corner-radius:10;	
+	    	fill-alphas:1,1;
+	    	padding-left:10;
+	    }
+	    
+	    Form {
+	    	padding-top:0;
+	    	padding-bottom:0;	
+	    }

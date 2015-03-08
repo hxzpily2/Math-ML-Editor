@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" initialize="StyleManager.loadStyleDeclarations( 'docker.swf' );initDisplayBoard();" layout="absolute" xmlns:ns1="components.*" xmlns:code="http://code.google.com/p/flexlib/" height="800" xmlns:ns2="flexlib.controls.*">
+		<mx:Style>
+.plaintext
+{
+fontSize: 20pt;
+fontFamily: myStixFont;
+fontWeight: normal;
+}
+.boldtext
+{
+fontSize: 20pt;
+fontFamily: myFont;
+fontWeight: normal;
+} 
+</mx:Style>
+<!--<mx:Style source="docker.css"/>-->
+<mx:Script>
+	[Embed(source='Fonts/STIXGeneral.otf',
+fontName='myStixFont',
+mimeType='application/x-font'
+)]
+private var font1:Class;
+</mx:Script>
+<mx:Script source="/components/Initialize.as"/>
+
+<mx:HTTPService id="service" useProxy="false" url="/../blazeds/EquationEditor-debug/Store.jsp" resultFormat="text" result="onResult(event)" fault="onFault(event)">
+	<mx:request xmlns="">
+		<uid>{UID}</uid>
+		<username>{username}</username>
+		<equationtitle>{equationtitle}</equationtitle>
+		<mathml>{storeMathML}</mathml>		
+	</mx:request>
+</mx:HTTPService>
+	
+ <mx:Canvas x="722" y="447" height="100%" width="100%"  id="temp_canvas"/>
+ <mx:Move duration="300" id="DockerMove" easingFunction="Bounce.easeOut"/>
+ <mx:Fade duration="300" id="DockerFade"/>
+<mx:Zoom duration="600" id="PanelZoom"/>
+ <mx:Dissolve duration="600" id="PanelDissolve" />
+	
+	
+	<mx:VBox id="MainFrame" height="637" width="912" x="0" y="0">
+	<mx:VBox width="911" id="fixedFrame" height="119">
+		<mx:HBox width="606" height="31">
+			<mx:MenuBar id="myMenuBar" labelField="@label" itemClick="initialize_menu(event)">
+			         <mx:XMLList id="file_xml">
+			            <menuitem label="File" >
+			              <menuitem label="New"  enabled="true"/>
+			              <menuitem label="Open" enabled="true"/>
+			              <menuitem label="Save" enabled="true"/>
+			              <menuitem label="Exit" enabled="true"/>
+			            </menuitem>
+			            <menuitem label="View">
+			            	<menuitem label="Standard" enabled="true">
+			            	  		<menuitem id="basic" label="Basic" type="check" />
+			            		<menuitem id="advance" label="Advanced" type="check" toggled="true"/>
+			            	</menuitem>	
+			            </menuitem>
+			           <menuitem label="Help" type="check" selected="true"/>
+			          </mx:XMLList>
+			</mx:MenuBar>
+			<mx:Button label="Publish" click="doPublish()"/>
+			<mx:Button label="Draw Equation" click="drawEquation()"/>
+			<mx:CheckBox label="Preview" click="checkSelection()"  enabled="true" id="checkbox1" width="71"/>
+			<mx:TextInput id="testArea"/>
+		</mx:HBox>
+		<code:DockableToolBar id="toolbar1" width="907" height="49">
+		<mx:Button label="Delete" click="deleteElement()"/>
+		<mx:Button id="matrixPopup" label="Matrix" creationComplete="initMatrix()" click="openMatrix()" />
+			<mx:Button id="button" label="+" click="createCustom(event)"/>
+			<mx:Button id="button1" label="=" click="createCustom(event)"/>
+			<mx:Button id="button2" label="Numbers" click="createCustom(event)"/>
+			<mx:Button id="button3" label="Operands" click="createCustom(event)"/>
+			<mx:Button id="button4" label="MathMl" click="createCustom(event)"/>
+			<mx:Button id="button5" label="Fence" click="createCustom(event)"/>	
+			<mx:Button id="button6" label="greek" click="createCustom(event)"/>
+			<mx:Button id="button7" label="Arrow" click="createCustom(event)"/>
+			<mx:Button id="button8" label="Integral" click="createCustom(event)"/>
+			<mx:Button id="button9" label="Summation" click="displaySummation()"/>
+			<mx:Button id="button10" label="mapsTo" click="createCustom(event)"/> 
+		</code:DockableToolBar>
+		<code:Docker height="24" width="308">
+		</code:Docker>
+	</mx:VBox>
+	<mx:HBox width="100%" height="483" id="SecondFrame" horizontalAlign="right" horizontalScrollPolicy="on" verticalScrollPolicy="on">
+	<mx:VBox x="122" y="153" width="250" height="100%">
+		<mx:Label text="Equations created By {storeuser}" width="135" fontSize="12" height="27" textDecoration="underline"/>
+		<mx:List id="equationNames"  buttonMode="true"
+		  borderStyle="inset" itemClick="getMathML()"  width="247" height="179"/>
+		<mx:DataGrid  visible="true" id="myGrid" width="248" height="161" dragEnabled="true" draggableColumns="true" dragMoveEnabled="true"  >
+				<mx:columns>
+					<mx:DataGridColumn headerText="NodeId" dataField="nodeid"/>
+					<mx:DataGridColumn headerText="NodeParent" dataField="nodeparent"/>
+					<mx:DataGridColumn headerText="NodeType" dataField="nodetype"/>
+					<mx:DataGridColumn headerText="NodePsition" dataField="nodeposition"/>
+					<mx:DataGridColumn headerText="NodeTexct" dataField="nodetext"/>
+				</mx:columns>
+			</mx:DataGrid>
+		<mx:HBox width="100%">
+			<mx:Button label="Edit" width="61"/>
+			<mx:Button label="Preview" width="77"/>
+		</mx:HBox>
+	</mx:VBox>
+	<mx:Panel width="376" height="100%" layout="vertical" title="View Equation">
+		<mx:HBox x="0" y="0" width="100%" height="100%"  id="symbols_canvas" horizontalAlign="center" verticalAlign="middle" horizontalScrollPolicy="off" verticalScrollPolicy="off" >
+		</mx:HBox>
+	</mx:Panel>
+	<mx:TextArea id="mathInput" width="87" height="415"  visible="true"/>
+	
+	<ns1:infoHelpBox  height="100%" width="174" id="infoPanel">
+	</ns1:infoHelpBox>
+	</mx:HBox>
+	</mx:VBox>
+</mx:Application>

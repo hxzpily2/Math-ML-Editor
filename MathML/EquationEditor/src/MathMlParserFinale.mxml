@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" x="-73" y="9" width="1024" height="768">
+	
+	<mx:TextArea x="222" y="10" width="351" height="145" id="mathInput"/>
+	<mx:Button x="280" y="163" label="Draw" click="drawEquation()"/>
+	<mx:Panel x="222" y="219" width="434" height="196" layout="absolute">
+		<mx:HBox x="0" y="0" width="100%" horizontalAlign="center" verticalAlign="middle" id="drawingBoard" horizontalScrollPolicy="on" height="156" verticalScrollPolicy="on">
+		</mx:HBox>
+	</mx:Panel>
+	<mx:Script>
+		<![CDATA[
+			import containers.GlobalData;
+			import com.parser.XMLReverter;
+			import mx.managers.PopUpManager;
+			import mx.controls.Label;
+			import mx.controls.Alert;
+			import com.parser.XmlOperation3;
+			import components.PopupPanel;
+			import containers.DisplayContainer;
+			public var eqDisplay:PopupPanel;
+			
+			public function drawEquation():void{
+				//eqDisplay;
+				eqDisplay=new PopupPanel()
+				eqDisplay.createPop();GlobalData.refreshState();
+				var containerHandler:DisplayContainer=new DisplayContainer();
+				containerHandler.initHBox();containerHandler.assignId();
+				GlobalData._currentContainer.countid=0;//containerHandler;//=containerHandler;
+			
+				var xmlO:XmlOperation3=new XmlOperation3(temp_canvas);
+				var MathML:XML=new XML(mathInput.text);
+				containerHandler=xmlO.loadNode(MathML,containerHandler);
+				drawingBoard.addChild(containerHandler.dContainer);
+				eqDisplay.myHbox.addChild(containerHandler.dContainer);
+				PopUpManager.addPopUp(eqDisplay,this,false);
+				PopUpManager.centerPopUp(eqDisplay);
+			}
+			public function addchild():void{
+				drawingBoard.removeAllChildren();
+			}	
+			public function generateTable():void{
+				var xmlReverter:XMLReverter=new XMLReverter();
+				xmlReverter.mathMl=new XML(mathInput.text);
+				xmlReverter.loadMathTable();
+				myGrid.dataProvider=GlobalData.setTable;
+			}
+			]]>
+	</mx:Script>
+	<mx:Canvas   width="100%" height="100%" id="temp_canvas" visible="false" >
+	</mx:Canvas>
+	<mx:Button label="ClearCanvas" click="addchild()" x="371" y="163"/>
+	<mx:Button x="479" y="163" label="Generate Math Table" click="generateTable()"/>
+		<mx:DataGrid  visible="true" x="581" y="10" id="myGrid" width="304" height="145" dragEnabled="true" draggableColumns="true" dragMoveEnabled="true"  >
+		<mx:columns>
+			<mx:DataGridColumn headerText="NodeId" dataField="nodeid"/>
+			<mx:DataGridColumn headerText="NodeParent" dataField="nodeparent"/>
+			<mx:DataGridColumn headerText="NodeType" dataField="nodetype"/>
+			<mx:DataGridColumn headerText="NodePsition" dataField="nodeposition"/>
+			<mx:DataGridColumn headerText="NodeTexct" dataField="nodetext"/>
+		</mx:columns>
+	</mx:DataGrid>
+	
+		
+</mx:Application>

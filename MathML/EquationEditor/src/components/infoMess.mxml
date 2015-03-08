@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="40" cornerRadius="5"  addedEffect="" dropShadowColor="#F67C7C" dropShadowEnabled="true">
+	<mx:Glow id="glowImage" duration="1000" 
+        alphaFrom="1.0" alphaTo="0.3" 
+        blurXFrom="0.0" blurXTo="50.0" 
+        blurYFrom="0.0" blurYTo="50.0" 
+        color="0x00FF00"/>
+    <mx:Glow id="unglowImage" duration="1000" 
+        alphaFrom="0.3" alphaTo="1.0" 
+        blurXFrom="50.0" blurXTo="0.0" 
+        blurYFrom="50.0" blurYTo="0.0" 
+        color="0x0000FF"/>
+	
+	<mx:Image width="30" height="30" id="iIcon"  creationCompleteEffect="{glowImage}" 
+            moveEffect="{glowImage}" 
+            mouseUpEffect="{unglowImage}" source="icons/ConvertibleTreeList.png"/>
+	<mx:Text text="RETETETERT" width="100" height="40" id="iMessage"/>
+	
+</mx:HBox>
